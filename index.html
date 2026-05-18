@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <title>Berita Kini</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="showHome()">
+                <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 12C8 8.686 10.686 6 14 6C17.314 6 20 8.686 20 12C20 15.314 17.314 16 14 16C10.686 16 8 17.686 8 21C8 24.314 10.686 26 14 26C17.314 26 24 24.314 24 21"
+                        stroke="#1a6fe8" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                    <path d="M24 12C24 8.686 21.314 6 18 6"
+                        stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                </svg>
+                <span class="logo-text">Berita Kini</span>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a class="nav-link active" data-cat="" onclick="navClick(this, '')">Beranda</a></li>
+                <li><a class="nav-link" data-cat="terbaru" onclick="navClick(this, 'terbaru')">Terbaru</a></li>
+                <li><a class="nav-link" data-cat="hiburan" onclick="navClick(this, 'hiburan')">Hiburan</a></li>
+                <li><a class="nav-link" data-cat="gaya-hidup" onclick="navClick(this, 'gaya-hidup')">Gaya Hidup</a></li>
+                <li><a class="nav-link" data-cat="olahraga" onclick="navClick(this, 'olahraga')">Olahraga</a></li>
+                <li><a class="nav-link" data-cat="nasional" onclick="navClick(this, 'nasional')">Nasional</a></li>
+                <li><a class="nav-link" data-cat="internasional" onclick="navClick(this, 'internasional')">Internasional</a></li>
+            </ul>
+
+            <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div class="page active" id="homePage">
+
+        <!-- Headline -->
+        <div id="heroWrap">
+            <div class="hero-wrap">
+                <div class="loading-box">
+                    <div class="spinner"></div>
+                    Memuat headline...
+                </div>
+            </div>
+        </div>
+
+        <!-- Berita Terpopuler -->
+        <section class="popular-section">
+            <h2 class="sec-title">Berita Terpopuler</h2>
+            <div class="popular-grid" id="popularGrid">
+                <div class="loading-box"><div class="spinner"></div></div>
+            </div>
+        </section>
+
+        <!-- Rekomendasi -->
+        <section class="recommend-section">
+            <div class="recommend-head">
+                <h2 class="sec-title" style="margin-bottom:0;">Rekomendasi Untuk Anda</h2>
+                <div class="search-wrap">
+                    <input type="text" id="searchInput" placeholder="Cari disini..." oninput="onSearch(this.value)">
+                    <svg width="15" height="15" fill="none" stroke="#9ca3af" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="news-grid" id="newsGrid" style="margin-top:24px;">
+                <div class="loading-box"><div class="spinner"></div></div>
+            </div>
+            <div class="pager-wrap" id="pagerWrap"></div>
+        </section>
+
+        <!-- Banner Iklan -->
+        <div class="banner">
+            <div class="banner-inner">
+
+                <!-- LEFT -->
+                <div class="banner-content">
+                    <div class="banner-title">
+                        Petualangan Edukatif bersama
+                        Malang Mbois City Tour!
+                    </div>
+
+                    <div class="banner-desc">
+                        Petualangan Edukatif bersama
+                        Malang Mbois City Tour!
+                    </div>
+
+                    <div class="banner-dots">
+                        <div class="dot"></div>
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+
+                <!-- RIGHT -->
+                <div class="banner-images">
+
+                    <div class="tour-card card-1">
+                        <img src="img/museum.jpg" alt="">
+                        <span>Museum Brawijaya</span>
+                    </div>
+
+                    <div class="tour-card card-2">
+                        <img src="img/kayutangan.jpg" alt="">
+                        <span>Kayutangan</span>
+                    </div>
+
+                    <div class="tour-card card-3">
+                        <img src="img/kebun.jpg" alt="">
+                        <span>Kebun Binatang</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- end #homePage -->
+
+    <!-- DETAIL PAGE -->
+    <div class="page" id="detailPage">
+
+        <div class="detail-container">
+
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <span onclick="showHome()">🏠 Beranda</span>
+                <span>›</span>
+                <span id="detailBcCat" onclick="showHome()">Nasional</span>
+                <span>›</span>
+                <span>Detail</span>
+            </div>
+
+            <!-- Konten Utama + Sidebar -->
+            <div class="detail-layout">
+
+                <!-- Konten Utama -->
+                <div>
+                    <div class="detail-cat-row">
+                        <span class="detail-cat" id="detailCat"></span>
+                        <span class="detail-date-tag" id="detailDate"></span>
+                    </div>
+                    <h1 class="detail-h1" id="detailTitle"></h1>
+                    <div id="detailImgWrap"></div>
+                    <div class="detail-caption" id="detailCaption"></div>
+                    <div class="detail-body" id="detailBody"></div>
+                    <div id="detailLinkWrap" style="margin-top:20px;"></div>
+
+                    <!-- Komentar -->
+                    <div class="comments-section">
+                        <h2 class="sec-title">Komentar</h2>
+
+                        <div class="comment-form">
+                            <div class="comment-avatar"></div>
+                            <div class="cform-body">
+                                <textarea
+                                    class="cform-textarea"
+                                    id="commentInput"
+                                    placeholder="Apa yang ingin anda tanyakan?"
+                                    maxlength="90"
+                                    oninput="updateChar()"
+                                ></textarea>
+                                <div class="cform-bottom">
+                                    <span class="cform-char"><span id="charCount">0</span>/90</span>
+                                    <button class="btn-kirim" onclick="submitComment()">Kirim</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contoh Komentar -->
+                        <div id="commentsList">
+                            <div class="comment-item">
+                                <div class="ci-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">UY</div>
+                                <div>
+                                    <div>
+                                        <span class="ci-name">UJANG YUSMEIDI S.P., M.Agr.</span>
+                                        <span class="ci-time">• 29 Mar 2024 11:15</span>
+                                    </div>
+                                    <div class="ci-text">
+                                        Mohon maaf, apakah sertifikatnya sudah tidak dapat diunduh? Karena saya mau
+                                        download ada konfirmasi bahwa TOTP aktivasi salah. Bagaimana ya solusinya?
+                                    </div>
+                                    <span class="ci-reply">Balas</span>
+
+                                    <!-- Balasan -->
+                                    <div class="comment-item" style="margin-top:12px;margin-bottom:0;">
+                                        <div class="ci-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe);font-size:11px;">DR</div>
+                                        <div>
+                                            <div>
+                                                <span class="ci-name">DINA RIKHA RIYANAWATI, S.Pd</span>
+                                                <span class="ci-time">• 29 Mar 2024 11:15</span>
+                                            </div>
+                                            <div class="ci-text">saya mengunduh sertifikatnya kok juga belumbisa</div>
+                                            <span class="ci-reply">Balas</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Paginasi Komentar -->
+                        <div class="comment-pager">
+                            <span>
+                                Item per page
+                                <select>
+                                    <option>5</option>
+                                    <option>10</option>
+                                </select>
+                                of 200
+                            </span>
+                            <div class="pager">
+                                <button class="pbtn">‹</button>
+                                <button class="pbtn active">1</button>
+                                <button class="pbtn">2</button>
+                                <button class="pbtn">›</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end .comments-section -->
+                </div>
+                <!-- end Konten Utama -->
+
+                <!-- Sidebar -->
+                <aside>
+                    <h2 class="sec-title">Berita Terpopuler</h2>
+                    <div class="sidebar-popular" id="sidebarPopular">
+                        <div class="loading-box" style="grid-column:unset;padding:24px;">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+            <!-- end .detail-layout -->
+        </div>
+
+        <!-- Berita Terkait -->
+        <div class="related-section">
+            <div class="related-head">
+                <h2 class="sec-title" style="margin-bottom:0;">Berita Terkait</h2>
+                <span class="lihat-semua" onclick="showHome()">Lihat Semua</span>
+            </div>
+            <div class="related-grid" id="relatedGrid"></div>
+        </div>
+
+    </div>
+    <!-- end #detailPage -->
+
+    <!-- CATEGORY PAGE -->
+    <div class="page" id="catPage">
+        <div class="cat-container">
+            <h1 class="cat-page-title" id="catPageTitle"></h1>
+            <div class="news-grid" id="catGrid">
+                <div class="loading-box"><div class="spinner"></div></div>
+            </div>
+            <div class="pager-wrap" id="catPager"></div>
+        </div>
+    </div>
+    <!-- end #catPage -->
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+
+            <!-- Brand -->
+            <div>
+                <div class="f-logo">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                        <path d="M8 12C8 8.686 10.686 6 14 6C17.314 6 20 8.686 20 12C20 15.314 17.314 16 14 16C10.686 16 8 17.686 8 21C8 24.314 10.686 26 14 26C17.314 26 24 24.314 24 21"
+                                stroke="#fff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                        <path d="M24 12C24 8.686 21.314 6 18 6"
+                                stroke="rgba(255,255,255,.55)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                    <span class="f-logo-text">Berita Kini</span>
+                </div>
+                <div class="f-copy">© 2023 Berita Kini. All Rights Reserved.</div>
+                <div class="f-social-label">Ikuti Kami</div>
+                <div class="social-row">
+
+                    <a href="#" class="si" title="YouTube">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+
+                    <a href="#" class="si" title="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" class="si" title="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- Telusuri -->
+            <div>
+                <div class="f-head">Telusuri</div>
+                <ul class="f-links">
+                    <li><a onclick="showHome()">Beranda</a></li>
+                    <li><a onclick="navClick(null, 'nasional')">Nasional</a></li>
+                    <li><a onclick="navClick(null, 'internasional')">Internasional</a></li>
+                    <li><a onclick="navClick(null, 'olahraga')">Olahraga</a></li>
+                    <li><a onclick="navClick(null, 'teknologi')">Teknologi</a></li>
+                    <li><a onclick="navClick(null, 'hiburan')">Hiburan</a></li>
+                </ul>
+            </div>
+
+            <!-- Bantuan -->
+            <div>
+                <div class="f-head">Bantuan</div>
+                <ul class="f-links">
+                    <li><a>Kontak Kami</a></li>
+                    <li><a>Laporan Pembajakan</a></li>
+                    <li><a>Kebijakan</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div>
+                <div class="f-head">Berlangganan Berita Terbaru</div>
+                <div class="newsletter-row">
+                    <input class="nl-input" type="email" placeholder="Masukan email" id="nlEmail">
+                    <button class="nl-btn" onclick="subscribeNewsletter()">➤</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-bottom">Dibuat dengan ♥ untuk Technical Test Front End Development Magang</div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
